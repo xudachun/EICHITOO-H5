@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=640,user-scalable=no" />
+    <title>爱居兔反馈问题</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .warpper {
+        background: url(img/indexbg.png) top center no-repeat;
+        background-size: cover;
+        display: block;
+        /* border:1px solid seagreen; */
+        max-width: 640px;
+        min-height: 1000px;
+        margin: 0 auto;
+        height: 100vh;
+        position: relative;
+      }
+
+      .btns {
+        position: absolute;
+        width: 550px;
+        left: 50%;
+        margin-left: -275px;
+        bottom: 70px;
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .btns a {
+        display: inline-block;
+        width: 200px;
+        padding: 25px;
+      }
+
+      .btns a img {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        /* border: 1px solid; */
+      }
+
+      .myAnswer{
+        display: inline-block;
+        width: 180px;
+        height: 40px;
+        background-color:#c86093; 
+        color:white;
+        border-radius: 20px;
+        text-align: center; 
+        line-height: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="warpper">
+      <div class="btns">
+        <a href="design.html"> <img src="img/design-btn.png" alt="" /> </a>
+        <a href="wxshop.html"> <img src="img/wxshop-btn.png" alt="" /> </a>
+        <a href="ser.html"> <img src="img/ser-btn.png" alt="" /> </a>
+        <a href="else.html"> <img src="img/else-btn.png" alt="" /> </a>
+      </div>
+      <a href="javascript:void(0)" class="myAnswer">
+        我的反馈
+      </a>
+    </div>
+
+    <div class="mask">
+      <div class="alert-imgs">
+        <img class="i1" src="img/need.png" alt="" />
+        <div class="i2">谢谢您的参与。</div>
+      </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script>
+      $(document).ready(function() {
+        function alertShow(i) {
+          var key = ".i" + i;
+          console.log(key);
+          $(key)
+            .addClass("flex-style")
+            .siblings()
+            .removeClass("flex-style");
+          $(".mask").addClass("flex-style");
+        }
+         alertShow(1)
+        $(".mask").click(function() {
+          console.log(1);
+          $(".mask").removeClass("flex-style");
+        });
+      });
+    </script>
+  </body>
+</html>

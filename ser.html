@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=640,user-scalable=no" />
+  <title>爱居兔反馈-门店服务</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <style>
+    body {
+        color: #ca5f93;
+      }
+
+      .warpper {
+        background: url(img/serbg.png) top center no-repeat;
+        background-size: cover;
+        display: block;
+        max-width: 640px;
+        min-height: 1138px;
+        margin: 0 auto;
+        height: 100vh;
+        position: relative;
+      }
+      .content {
+        position: absolute;
+        left: 50%;
+        margin-left: -250px;
+        top: 50%;
+        margin-top: -300px;
+        width: 500px;
+        height: 800px;
+        background-color: white;
+        border-radius: 35px;
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        align-items: center;
+        -moz-box-shadow: 1px 8px 20px #cecece;
+        -webkit-box-shadow: 1px 8px 20px #cecece;
+        box-shadow: 1px 8px 20px #cecece;
+      }
+      .content label {
+        padding: 40px 0 10px;
+        width: 400px;
+        border-bottom: 1px solid #ca5f93;
+      }
+
+      label span {
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        color: #ca5f93;
+        text-align: justify;
+        white-space: nowrap;
+      }
+      /* label input[type=text]{ */
+      label input {
+        outline: none;
+        width: 280px;
+        border: transparent;
+        -web-kit-appearance: none;
+        -moz-appearance: none;
+      }
+      .choosen {
+        display: inline-block;
+        margin: 10px 0 40px;
+        height: 40px;
+        line-height: 40px;
+        width: 400px;
+        background-color: #c86093;
+        color: #fff;
+        text-align: center;
+      }
+      textarea {
+        outline: none;
+        resize: none;
+        width: 380px;
+        height: 180px;
+      }
+      #subBtn{
+        padding-top: 30px;
+        width: 160px;
+        height: 50px;
+      }
+      #subBtn img{
+        display: inline-block;
+        width: 160px;
+        height: 50px;
+       }
+       .chooseStore{
+        width: 500px;
+        height: 700px;
+        background-color: white;
+        /* border-radius: 35px; */
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        /* align-items: flex-start;
+         */
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chooseStore p{
+        padding: 20px 0 20px 0px;
+        margin: 0px 40px;
+        width: 420px; 
+        font-size: 24px;
+      }
+      .chooseStore span{
+        padding: 20px 0 20px 0px;
+        margin: 20px 40px;
+        
+        /* border-bottom: 1px solid rgba(200, 96, 147, 0.23); */
+        /* border: 1px solid rgba(200, 96, 147, 0.23); */
+        /* border-bottom-width: 80%; */
+        width: 420px;
+        text-align: center;    
+      }
+       .searchResult{
+        width: 500px;
+        height: 700px;
+        background-color: white;
+        /* border-radius: 35px; */
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .searchResult p{
+          padding:20px;        
+      }
+      .searchResult span{
+        padding: 20px 0 20px 0px;
+        /* border-bottom: 1px solid #c86093; */
+        margin: 0 40px;
+        width: 420px;
+        text-align: center; 
+      }
+      .select{
+        border: 1px solid rgba(200, 96, 147, 0.23);
+      }
+      .seemore{
+        display:inline-block;width:80%;color:white;background:#c86093;padding: 20px 10%;text-align: center;
+      }
+      .searchPanel{
+        display: flex;
+        display: -webkit-flex;
+        width: 500px;
+        height: 700px;
+        background-color: white;
+        /* border-radius: 35px; */
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .searchPanel input{
+        border-bottom:1px solid #c86093!important;
+        outline: none;
+        width: 280px;
+        height: 40px;
+        border: transparent;
+        background: transparent;
+        -web-kit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      .searchPanel input::-webkit-input-placeholder{
+        color: #c86093;
+      }
+      .listContent{
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: nowrap;
+        align-self: center;
+        justify-content: space-around;
+        width: 80%;
+      }
+      .lists{
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: nowrap;
+        align-self: center;
+        justify-content: space-around;
+        width: 70%;
+      }
+      .lists li{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        margin:0 8px;
+      }
+      .searchResult{
+        height: 500px;
+      }
+      .redWarn{
+        border: 1px solid red!important;
+      }
+      .cur{
+        background-color: #c86093;
+        color:white;
+      }
+      @keyframes shake {
+      from, to {
+        transform: translate3d(0, 0, 0);
+      }
+
+      10%, 30%, 50%, 70%, 90% {
+        transform: translate3d(-10px, 0, 0);
+      }
+
+      20%, 40%, 60%, 80% {
+        transform: translate3d(10px, 0, 0);
+      }
+    }
+
+    .shake {
+      animation-name: shake;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+    #searchBtn,#searchBtn img{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+    }
+    .pre,.next{
+      width: 80px!important;
+    }
+    </style>
+</head>
+
+<body>
+  <!-- <div style="height:100px;"></div> -->
+  <div class="warpper">
+    <div class="content">
+      <label for="userName">
+        <span>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名:</span>
+        <input id="userName" type="text" />
+      </label>
+
+      <label for="tel"> <span>联系方式:</span> <input id="tel" type="number" /> </label>
+      <div style=" padding: 40px 0 10px;width: 400px;">门店地址:</div>
+      <a id="storeLocation" class="choosen" href="javascript:void(0)">请选择门店</a>
+      <label for="problem" style="border:none;padding:0;">
+        <p>问题描述（50字以内）:</p>
+        <textarea style="border:1px solid #ca5f93;padding:10px;" name="problem" id="problem" cols=" 30" rows="10"
+          maxlength="50" onchange="this.value=this.value.substring(0, 50)" onkeydown="this.value=this.value.substring(0, 60)"
+          onkeyup="this.value=this.value.substring(0, 50)"></textarea>
+      </label>
+
+      <label for="describe">
+        <span style="width: 120px">备注(非必要):</span>
+        <input type="text" id="describe" maxlength="20" style="width: 260px" />
+      </label>
+      <a href="javascript:void(0)" id="subBtn">
+        <img src="img/subBtn.png" alt="">
+      </a>
+    </div>
+  </div>
+
+  <div class="mask">
+    <div class="alert-imgs">
+      <img class="i1" src="img/need.png" alt="" />
+      <div class="i2">谢谢您的参与。</div>
+      <div class="i3">请填写姓名</div>
+      <div class="i4">请填写正确的联系方式</div>
+      <div class="i5">请填写问题描述</div>
+      <div class="i6">请选择门店</div>
+      <div class="i8">请输入门店值</div>
+      <div class="i7 ">
+        <div class="chooseStore">
+          <p>发现您附近五家门店(点击选择)：</p>
+          <span class="select">连云港连云港连云港</span>
+          <span class="select">张家港1张家港1张家港1张家港1</span>
+          <span class="select">张家港3</span>
+          <span class="select">张家港s4</span>
+          <span class="select">张家港5</span>
+          <a href="javascript:void(0)" class="seemore">点此查看更多门店</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="searchMask">
+    <div class="searchPanel">
+      <div>
+        <input id="searchInput" placeholder="请输入地址" type="text" style="text-align: center">
+        <a href="javascript:void(0)" id="searchBtn"><img src="img/search.png" alt=""></a>
+      </div>
+      <div class="searchResult">
+        <span>没有查询结果</span>
+
+
+        <!-- 此处插入结果 并且 每页结果不能超过7条  -->
+        <!-- 示范 -->
+        <span class="select">苏州</span>
+        <span class="select">盐城</span>
+        <span class="select">滨海县</span>
+        <span class="select">桐峪镇</span>
+        <span class="select">通榆镇</span>
+        <span class="select">苏州</span>
+
+
+
+      </div>
+      <div class="listContent">
+        <div class="pre">上一页</div>
+        <!-- 页码 -->
+        <ul class="lists">
+          <li class="cur">1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+
+        </ul>
+        <div class="next">下一页</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/jquery.js"> </script>
+  <script>
+    // $(document).ready(
+    // function () {
+    // console.log('begin')
+    $(".chooseStore").on("click", function () {}, false); //防止冒泡
+    $(".searchPanel").on("click", function () {}, false); //防止冒泡
+    $(".seemore").on("click", function () { //查看更多 显示searchMask
+      maskHide();
+      $(".searchMask").addClass("flex-style");
+    })
+
+    $("#searchBtn").on("click", function () {
+      $("#searchInput").removeClass("shake");
+      var searchValue = $("#searchInput").val().trim();
+      if (searchValue == "") { //查询空值处理
+        setTimeout(() => { //延迟0.1s防止不抖动
+          $("#searchInput").addClass("shake");
+        }, 100);
+
+        return false;
+      }
+
+
+      // 此处发送  searchValue  数据查询 地址
+      console.log(searchValue)
+
+    })
+
+    function alertShow(i) {
+      var key = ".i" + i;
+      $(key)
+        .addClass("flex-style")
+        .siblings()
+        .removeClass("flex-style");
+      $(".mask").addClass("flex-style");
+    }
+
+    function maskHide() {
+      $(".mask").removeClass("flex-style");
+    }
+
+    function searchMaskHide() {
+      $(".searchMask").removeClass("flex-style");
+    }
+
+    $(".mask").click(function () {
+      maskHide();
+    });
+    $(".searchMask").click(function () {
+      console.log('a')
+      searchMaskHide();
+    });
+
+
+    $(".select").on("click", function () {
+      $("#storeLocation").text($(this).text())
+      maskHide();
+      searchMaskHide();
+      return false;
+    })
+
+    $("#storeLocation").on("click", function () {
+      alertShow(7); //显示选择门店页面
+    })
+
+
+
+    $("#subBtn").on("click", function () {//提交事件
+      savaData();
+    })
+
+
+    // 验证手机号码
+    function isMobile(mobile) {
+      return /^[1][0-9]{10}$/.test(mobile);
+    }
+    var pdata = {};
+    //数据验证
+    function savaData() {
+      var name = $("#userName").val().trim(),
+        tel = $("#tel").val().trim(),
+        storeLocation = $("#storeLocation").text(),
+        problem = $("#problem").val().trim(),
+        describe = $("#describe").val().trim();
+
+      // if (base64url == null) {
+      // showMsg('请上传照片', title);
+      // return false;
+      // }
+      if (name === "") {
+        alertShow(3); //填写姓名
+        return false;
+      }
+
+      if (!isMobile(tel)) {
+        alertShow(4); //填写正确的号码
+        return false;
+      }
+
+      if (storeLocation === "请选择门店") {
+        alertShow(6); //请选择门店
+        return false;
+      }
+
+      if (problem === "") {
+        alertShow(5); //问题描述
+        return false;
+      }
+
+
+      // pdata.base64url = base64url;
+      pdata.name = name;
+      pdata.tel = tel;
+      pdata.storeLocation = storeLocation;
+      pdata.problem = problem;
+      pdata.describe = describe;
+
+      console.log(pdata);
+      return true;
+    }
+
+    // }
+    // )
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=640,user-scalable=no" />
+    <title>爱居兔反馈-产品设计</title>
+    <link rel="stylesheet" href="css/reset.css" /> 
+     <link rel="stylesheet" href="css/cropper.css">
+    <link rel="stylesheet" href="css/crop.css">
+    <style>
+        body {
+        color: #ca5f93;
+      }
+
+      .warpper {
+        background: url(img/designbg.png) top center no-repeat;
+        background-size: cover;
+        display: block;
+        max-width: 640px;
+        min-height: 1138px;
+        margin: 0 auto;
+        height: 100vh;
+        position: relative;
+      }
+      
+     
+    </style>
+</head>
+
+<body>
+    <!-- <div style="height:100px;"></div> -->
+    <div class="warpper">
+        <div class="content">
+            <label for="userName">
+                <span>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名:</span>
+                <input id="userName" type="text" />
+            </label>
+
+            <label for="tel"> <span>联系方式:</span> <input id="tel" type="number" /> </label>
+            <label for="goodId">
+                <span>产品货号:</span>
+                <input id="goodId" type="text" />
+            </label>
+            <label for="problem" style="border:none;padding:40px 0 10px;">
+                <p>问题描述（50字以内）:</p>
+                <textarea style="border:1px solid #ca5f93;padding:10px;" name="problem" id="problem" cols=" 30" rows="10"
+                    maxlength="50" onchange="this.value=this.value.substring(0, 50)" onkeydown="this.value=this.value.substring(0, 60)"
+                    onkeyup="this.value=this.value.substring(0, 50)"></textarea>
+            </label>
+
+            <a id="finalImg" class="choosen" href="javascript:void(0)">上传图片</a>
+            <a href="javascript:void(0)" id="subBtn">
+                <img src="img/subBtn.png" alt="">
+            </a>
+        </div>
+    </div>
+
+    <div class="mask">
+        <div class="alert-imgs">
+            <img class="i1" src="img/need.png" alt="" />
+            <div class="i2">谢谢您的参与。</div>
+            <div class="i3">请填写姓名</div>
+            <div class="i4">请填写正确的联系方式</div>
+            <div class="i5">请填写问题描述</div>
+            <div class="i6">请选择门店</div>
+            <div class="i8">请输入门店值</div>
+            <div class="i9">请输入货号</div>
+            <img class="i10" src="img/needpic.png" alt="">
+            <img class="i11" src="img/thanks.png" alt="">
+
+        </div>
+    </div>
+    <!-- 以下为裁剪图片框 -->
+    <div style="display: none" class="tailoring-container">
+        <div class="black-cloth" onclick="closeTailor(this)"></div>
+        <div class="tailoring-content">
+            <div class="tailoring-content-one">
+                <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden"
+                        onchange="selectImg(this)"> 选择图片
+                </label>
+                <div class="close-tailoring" onclick="closeTailor(this)">×</div>
+            </div>
+            <div class="tailoring-content-two">
+                <div class="tailoring-box-parcel">
+                    <img id="tailoringImg">
+                </div>
+                <div class="preview-box-parcel">
+                    <p>图片预览:</p>
+                    <div class="square previewImg"></div>
+                    <div class="circular previewImg"></div>
+                </div>
+            </div>
+            <div class="tailoring-content-three">
+                <button class="l-btn cropper-reset-btn">复位</button>
+                <button class="l-btn cropper-rotate-btn">旋转</button>
+                <button class="l-btn cropper-scaleX-btn">换向</button>
+                <button class="l-btn sureCut" id="sureCut">确定</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"> </script>
+    <script src="js/Cropper.js"></script>
+    <script>
+        //定义图片base64
+        var base64url = null;
+
+        $("#finalImg").on("click", function () {
+            $(".tailoring-container").toggle();
+        });
+        //图像上传
+        function selectImg(file) {
+            if (!file.files || !file.files[0]) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                var replaceSrc = evt.target.result;
+                //更换cropper的图片
+                $('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        //cropper图片裁剪
+        $('#tailoringImg').cropper({
+            aspectRatio: 1 / 1, //默认比例
+            preview: '.previewImg', //预览视图
+            guides: false, //裁剪框的虚线(九宫格)
+            autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+            movable: false, //是否允许移动图片
+            dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+            movable: true, //是否允许移动剪裁框
+            resizable: true, //是否允许改变裁剪框的大小
+            zoomable: false, //是否允许缩放图片大小
+            mouseWheelZoom: false, //是否允许通过鼠标滚轮来缩放图片
+            touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+            rotatable: true, //是否允许旋转图片
+            crop: function (e) {
+                // 输出结果数据裁剪图像。
+            }
+        });
+        //旋转
+        $(".cropper-rotate-btn").on("click", function () {
+            $('#tailoringImg').cropper("rotate", 45);
+        });
+        //复位
+        $(".cropper-reset-btn").on("click", function () {
+            $('#tailoringImg').cropper("reset");
+        });
+        //换向
+        var flagX = true;
+        $(".cropper-scaleX-btn").on("click", function () {
+            if (flagX) {
+                $('#tailoringImg').cropper("scaleX", -1);
+                flagX = false;
+            } else {
+                $('#tailoringImg').cropper("scaleX", 1);
+                flagX = true;
+            }
+            flagX != flagX;
+        });
+
+        //裁剪后的处理
+        $("#sureCut").on("click", function () {
+            if ($("#tailoringImg").attr("src") == null) {
+                return false;
+            } else {
+                var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+                base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+                // $("#finalImg").prop("src", base64url); //显示为图片的形式
+                
+
+                // console.log(base64url)
+
+                //关闭裁剪框
+                closeTailor();
+            }
+        });
+        //关闭裁剪框
+        function closeTailor() {
+            $(".tailoring-container").toggle();
+        }
+
+
+        function alertShow(i) {
+            var key = ".i" + i;
+            $(key)
+                .addClass("flex-style")
+                .siblings()
+                .removeClass("flex-style");
+            $(".mask").addClass("flex-style");
+        }
+
+        function maskHide() {
+            $(".mask").removeClass("flex-style");
+        }
+
+        $(".mask").click(function () {
+            maskHide();
+        });
+
+
+        $("#subBtn").on("click", function () { //提交事件
+            savaData();
+        })
+
+
+        // 验证手机号码
+        function isMobile(mobile) {
+            return /^[1][0-9]{10}$/.test(mobile);
+        }
+        var pdata = {};
+        //数据验证
+        function savaData() {
+            var name = $("#userName").val().trim(),
+                tel = $("#tel").val().trim(),
+                goodId = $("#goodId").val().trim(),
+                problem = $("#problem").val().trim();
+                // describe = $("#describe").val().trim();
+
+
+            if (name === "") {
+                alertShow(3); //填写姓名
+                return false;
+            }
+
+            if (!isMobile(tel)) {
+                alertShow(4); //填写正确的号码
+                return false;
+            }
+
+            if (goodId === "") {
+                alertShow(9); //请输入货号
+                return false;
+            }
+
+            if (problem === "") {
+                alertShow(5); //问题描述
+                return false;
+            }
+
+            if (base64url == null) {
+                alertShow(10);//图片未上传
+            return false;
+            }
+
+            
+            pdata.name = name;
+            pdata.tel = tel;
+            pdata.goodId = goodId;
+            pdata.problem = problem;
+            pdata.base64url = base64url;
+            console.log(pdata);
+            return true;
+        }
+
+
+
+        // }
+        // )
+    </script>
+</body>
+
+</html>
